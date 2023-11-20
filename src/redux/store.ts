@@ -10,8 +10,8 @@ export const store = configureStore({
   //middleware: [thunk],
 });
 
-// Infer the `RootState` and `AppDispatch` types from the store itself
+// infer `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;
 
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
+// inferred types: {posts: PostsState, comments: CommentsState, users: UsersState} // JESSEFIX SOON
 export type AppDispatch = typeof store.dispatch;

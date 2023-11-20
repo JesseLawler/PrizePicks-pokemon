@@ -61,9 +61,12 @@ const App = (props: any) => (
   <ReduxProvider store={store}>
     <PaperProvider>
       <NavigationContainer>
-        <Navigator screenOptions={{headerShown: false}}>
-          <Screen name="Welcome" component={Screens.Welcome} />
-          <Screen name="Add Task" component={Screens.AddTask} />
+        <Navigator
+          screenOptions={{
+            headerShown: true, // false JESSEFIX NOW
+          }}>
+          <Screen name="Home" component={Screens.HomeScreen} />
+          <Screen name="Detail" component={Screens.SearchResultDetail} />
         </Navigator>
       </NavigationContainer>
     </PaperProvider>

@@ -1,4 +1,4 @@
-import Welcome from './welcome';
-import AddTask from './addTask';
+import HomeScreen from './home';
+import SearchResultDetail from './searchResultDetail';
 
-export {Welcome, AddTask};
+export {HomeScreen, SearchResultDetail};

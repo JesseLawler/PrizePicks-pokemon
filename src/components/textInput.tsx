@@ -1,9 +1,10 @@
 import React from 'react';
 import {TextInput as PaperTextInput} from 'react-native-paper';
 
-// JESSEFIX LATER kill any
-const Input = (props: any) => {
+const TextInput: React.FC<
+  React.ComponentProps<typeof PaperTextInput>
+> = props => {
   return <PaperTextInput {...props} />;
 };
 
-export default Input;
+export default TextInput;
