@@ -1,34 +1,64 @@
-import React from 'react';
-import {FlatList, ScrollView, StyleSheet, View} from 'react-native';
+import React, {useEffect} from 'react';
+import {
+  ActivityIndicator,
+  Alert,
+  FlatList,
+  ScrollView,
+  StyleSheet,
+  View,
+} from 'react-native';
+import NetInfo from '@react-native-community/netinfo';
 import Collapsible from 'react-native-collapsible';
 
 import * as Components from '../components/index';
 import {
+  displaySearchResults,
   incrementAge,
   searchForString,
   setAge,
   setName,
   toggleShowHistory,
+  updateInternetConnection,
 } from '../redux/actions';
 import {useAppSelector, useAppDispatch} from '../redux/hooks';
+import {InternetConnection} from '../types';
 import {STANDARD_BACKGROUND} from '../util/colors';
 
 const HISTORY_LIST = [`Item 1`, `Item 2`, `Item 3`, `Item 4`, `Item 5`];
-const RESULT_LIST = [
-  `Pokemon 1`,
-  `Pokemon 2`,
-  `Pokemon 3`,
-  `Pokemon 4`,
-  `Pokemon 5`,
-];
 
 // JESSEFIX LATER kill any
 const HomeScreen = (props: any) => {
   const age = useAppSelector(state => state.users.user.age);
+  const isLoading = useAppSelector(state => state.users.searchResultsIsLoading);
+  const isInternetConnected = useAppSelector(
+    state =>
+      state.users.internetConnection.connectionType === 'unknown' || // If the connectionType is still 'unknown', we give the benefit of the doubt.
+      state.users.internetConnection.isConnected,
+  );
   const name = useAppSelector(state => state.users.user.nickname);
   const searchResults = useAppSelector(state => state.users.searchResults);
   const showHistory = useAppSelector(state => state.users.showHistory);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    NetInfo.fetch().then(state => {
+      const conn: InternetConnection = {
+        connectionType: state.type,
+        isConnected: state.isConnected ?? false,
+      };
+      dispatch(updateInternetConnection(conn));
+    });
+
+    const unsubscribe = NetInfo.addEventListener(state => {
+      const conn: InternetConnection = {
+        connectionType: state.type,
+        isConnected: state.isConnected ?? false,
+      };
+      dispatch(updateInternetConnection(conn));
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -40,7 +70,12 @@ const HomeScreen = (props: any) => {
           {HISTORY_LIST.map((item, index) => (
             <Components.Button
               key={index}
-              onPress={() => dispatch(searchForString(item))}>
+              onPress={() => {
+                dispatch(searchForString(item));
+                setTimeout(() => {
+                  dispatch(displaySearchResults(item));
+                }, 2000);
+              }}>
               Search for {item}
             </Components.Button>
           ))}
@@ -73,6 +108,8 @@ const HomeScreen = (props: any) => {
         Toggle Show History
       </Components.Button>
 
+      {isLoading && <ActivityIndicator size="large" color="#0000ff" />}
+
       <FlatList
         data={searchResults}
         renderItem={({item}) => (
@@ -80,6 +117,8 @@ const HomeScreen = (props: any) => {
         )}
         keyExtractor={item => item}
       />
+
+      {!isInternetConnected && (Alert.alert(`No internet connection!`), null)}
     </View>
   );
 };

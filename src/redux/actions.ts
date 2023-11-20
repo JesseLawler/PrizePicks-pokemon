@@ -1,11 +1,22 @@
 import {Dispatch} from 'redux';
+import {InternetConnection} from '../types';
 
+export const DISPLAY_SEARCH_RESULTS = 'DISPLAY_SEARCH_RESULTS';
 export const INCREMENT_USER_AGE = 'INCREMENT_USER_AGE';
 export const SEARCH_FOR_STRING = 'SEARCH_FOR_STRING';
 export const SET_SELECTION = 'SET_SELECTION';
 export const SET_USER_NAME = 'SET_USER_NAME';
 export const SET_USER_AGE = 'SET_USER_AGE';
 export const TOGGLE_SHOW_HISTORY = 'TOGGLE_SHOW_HISTORY';
+export const UPDATE_INTERNET_CONNECTION = 'UPDATE_INTERNET_CONNECTION';
+
+export const displaySearchResults =
+  (query: string) => (dispatch: Dispatch<any>) => {
+    dispatch({
+      type: DISPLAY_SEARCH_RESULTS,
+      payload: query,
+    });
+  };
 
 export const incrementAge = () => (dispatch: Dispatch<any>) => {
   dispatch({
@@ -46,5 +57,13 @@ export const toggleShowHistory =
     dispatch({
       type: TOGGLE_SHOW_HISTORY,
       payload: isVisible,
+    });
+  };
+
+export const updateInternetConnection =
+  (connection: InternetConnection) => (dispatch: Dispatch<any>) => {
+    dispatch({
+      type: UPDATE_INTERNET_CONNECTION,
+      payload: connection,
     });
   };

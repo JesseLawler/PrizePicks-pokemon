@@ -1,3 +1,8 @@
+export type InternetConnection = {
+  connectionType: string;
+  isConnected: boolean;
+};
+
 export type User = {
   nickname: string;
   age: number;
