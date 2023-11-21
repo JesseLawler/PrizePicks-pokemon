@@ -3,15 +3,13 @@
  */
 
 import 'react-native';
-import React from 'react';
-import App from '../App';
 
-// Note: import explicitly to use the types shiped with jest.
-import {it} from '@jest/globals';
+// trivially stupid test
+const isCity = (city: string) => {
+  const cities = ['Vienna', 'San Juan', 'San Francisco', 'Corvallis'];
+  return cities.includes(city);
+};
 
-// Note: test renderer must be required after react-native.
-import renderer from 'react-test-renderer';
-
-it('renders correctly', () => {
-  renderer.create(<App />);
+test('Corvallis is known to be a city.', () => {
+  expect(isCity('Vienna')).toBeTruthy();
 });

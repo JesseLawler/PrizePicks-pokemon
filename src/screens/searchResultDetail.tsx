@@ -1,18 +1,31 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {StyleSheet, useWindowDimensions} from 'react-native';
+import {WebView} from 'react-native-webview';
 
-import {useAppSelector, useAppDispatch} from '../redux/hooks';
+import {useAppSelector} from '../redux/hooks';
 import {STANDARD_BACKGROUND} from '../util/colors';
 
-// JESSEFIX LATER kill any
-const SearchResultDetail = (props: any) => {
-  const selection = useAppSelector(state => state.users.selection);
-  const dispatch = useAppDispatch();
+const DEFAULT_URL = 'https://reactnative.dev/';
+
+const SearchResultDetail = () => {
+  const {width} = useWindowDimensions();
+
+  const selection = useAppSelector(state => state.selection);
+
+  /*
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: selection?.name ?? '',
+      //headerLeft: () => backButton,
+    });
+  }, []);
+  */
 
   return (
-    <View style={styles.container}>
-      <Text>Details about {selection}</Text>
-    </View>
+    <WebView
+      source={{uri: selection?.url ?? DEFAULT_URL}}
+      style={[styles.container, {width: width}]}
+    />
   );
 };
 

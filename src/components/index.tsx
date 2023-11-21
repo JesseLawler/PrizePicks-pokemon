@@ -1,6 +1,7 @@
+import Button from './button';
 import ListItem from './listItem';
+import SegmentedButtons from './segmentedButtons';
 import Text from './text';
 import TextInput from './textInput';
-import Button from './button';
 
-export {ListItem, Text, TextInput, Button};
+export {Button, ListItem, SegmentedButtons, Text, TextInput};

@@ -1,56 +1,59 @@
 import {Dispatch} from 'redux';
-import {InternetConnection} from '../types';
+import {InternetConnection, PokemonLink} from '../types';
 
-export const DISPLAY_SEARCH_RESULTS = 'DISPLAY_SEARCH_RESULTS';
-export const INCREMENT_USER_AGE = 'INCREMENT_USER_AGE';
-export const SEARCH_FOR_STRING = 'SEARCH_FOR_STRING';
+export const ADD_TO_SEARCH_HISTORY = 'ADD_TO_SEARCH_HISTORY';
+export const RECEIVE_API_RESPONSE = 'RECEIVE_API_RESPONSE';
+export const SET_FAVORITE_TYPE = 'SET_FAVORITE_TYPE';
+export const SET_NO_SEARCH_RESULTS = 'SET_NO_SEARCH_RESULTS';
 export const SET_SELECTION = 'SET_SELECTION';
-export const SET_USER_NAME = 'SET_USER_NAME';
-export const SET_USER_AGE = 'SET_USER_AGE';
+export const SET_SEARCH_STRING = 'SET_SEARCH_STRING';
 export const TOGGLE_SHOW_HISTORY = 'TOGGLE_SHOW_HISTORY';
 export const UPDATE_INTERNET_CONNECTION = 'UPDATE_INTERNET_CONNECTION';
 
-export const displaySearchResults =
+export const addToSearchHistory =
   (query: string) => (dispatch: Dispatch<any>) => {
     dispatch({
-      type: DISPLAY_SEARCH_RESULTS,
+      type: ADD_TO_SEARCH_HISTORY,
       payload: query,
     });
   };
 
-export const incrementAge = () => (dispatch: Dispatch<any>) => {
+export const displaySearchResults =
+  (apiResponse: string) => (dispatch: Dispatch<any>) => {
+    dispatch({
+      type: RECEIVE_API_RESPONSE,
+      payload: apiResponse,
+    });
+  };
+
+export const setFavoriteType =
+  (favType: string) => (dispatch: Dispatch<any>) => {
+    dispatch({
+      type: SET_FAVORITE_TYPE,
+      payload: favType,
+    });
+  };
+
+export const setNoSearchResults = () => (dispatch: Dispatch<any>) => {
   dispatch({
-    type: INCREMENT_USER_AGE,
+    type: SET_NO_SEARCH_RESULTS,
   });
 };
 
-export const searchForString = (query: string) => (dispatch: Dispatch<any>) => {
+export const setSearchString = (str: string) => (dispatch: Dispatch<any>) => {
   dispatch({
-    type: SEARCH_FOR_STRING,
-    payload: query,
+    type: SET_SEARCH_STRING,
+    payload: str,
   });
 };
 
-export const setSelection = (selected: string) => (dispatch: Dispatch<any>) => {
-  dispatch({
-    type: SET_SELECTION,
-    payload: selected,
-  });
-};
-
-export const setName = (name: string) => (dispatch: Dispatch<any>) => {
-  dispatch({
-    type: SET_USER_NAME,
-    payload: name,
-  });
-};
-
-export const setAge = (age: number) => (dispatch: Dispatch<any>) => {
-  dispatch({
-    type: SET_USER_AGE,
-    payload: age,
-  });
-};
+export const setSelection =
+  (selected: PokemonLink) => (dispatch: Dispatch<any>) => {
+    dispatch({
+      type: SET_SELECTION,
+      payload: selected,
+    });
+  };
 
 export const toggleShowHistory =
   (isVisible: boolean) => (dispatch: Dispatch<any>) => {
