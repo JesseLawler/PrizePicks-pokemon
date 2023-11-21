@@ -42,6 +42,8 @@ yarn lint
 
 > **Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions up through "Creating a new application" step, before proceeding.
 
+> Please also be sure that you have [Android Studio](https://developer.android.com/studio) (which provides you an Android Emulator if you lack a device) and [XCode](https://developer.apple.com/xcode/) (samesies for iOS) installed on your testing machine.
+
 ## Get to the right spot.
 
 Open a _new_ terminal from the _root_ of your React Native project.
@@ -59,10 +61,13 @@ yarn android
 
 ```bash
 yarn
-cd ios | pod install
+cd ios
+pod install
 cd ..
 yarn ios
 ```
+
+_Important Note:_ On _iOS_ (at least with a physical device), the above commands will install the app, but not launch it. You'll see the generic icon for a new app named _PrizePicksDemo_ which you can then click and open normally.
 
 ## Congratulations! :tada:
 
