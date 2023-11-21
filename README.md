@@ -24,15 +24,17 @@ This project was built for assessment purposes of Jesse Lawler (that's me!) by t
 
 - I didn't have time to add any automated testing. I put in a trivial jest test just to prove it runs, which you can trigger with...
 
-`````bash
-# using npm
+```bash
+# using Yarn
 yarn jest
+```
 
-- ESLint yields exactly 0 errors, 0 warnings.  Huzzah!  Confirm with...
+- ESLint yields exactly 0 errors, 0 warnings. Huzzah! Confirm with...
 
-````bash
-# using npm
+```bash
+# using Yarn
 yarn lint
+```
 
 # Running the App
 
@@ -50,6 +52,7 @@ Run the following commands to start your _Android_ or _iOS_ app:
 # using Yarn
 yarn
 yarn android
+```
 
 ## Step 2 (iOS):
 
@@ -59,16 +62,16 @@ yarn
 cd ios | pod install
 cd ..
 yarn ios
-`````
+```
 
 ## Congratulations! :tada:
 
 You've successfully run the app. :partying_face:
 
-### Now what?
+# Now what?
 
 - Contact Jesse: (323) 513-8779
 
-# Troubleshooting
+## Troubleshooting
 
 If you can't get this to work, send appropriate hate-mail to: business@JesseLawler.com
